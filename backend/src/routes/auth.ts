@@ -1,10 +1,9 @@
-import { Router } from "express"
-import { SignupHandler } from "../controllers/auth.controllers";
+import {  Router  } from "express"
+import { logoutHandler, loginHandler, signupHandler } from "../controllers/auth.controllers";
 const   authRoutes = Router();
 
 // prefix auth
-authRoutes.post("/signup",SignupHandler)
-authRoutes.post("/login")
-//
-//authRoutes.post("/login",LoginHandler)
+authRoutes.post("/signup",signupHandler)
+authRoutes.post("/login",loginHandler)
+authRoutes.post("/logout",logoutHandler)
 export default authRoutes;

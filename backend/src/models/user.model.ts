@@ -27,8 +27,8 @@ UserSchema.pre('save', async function(next){
     this.password = await hashValue(this.password , 8);
     next();
 })
-UserSchema.methods.comparePassword = async function (val :string ){
-    return compareValue(val , this.password);
+UserSchema.methods.comparePassword = async function (val :string ):Promise<boolean>{
+    return await compareValue(val , this.password);
 }
 UserSchema.methods.omitPassword = function (){
     const user = this.toObject();

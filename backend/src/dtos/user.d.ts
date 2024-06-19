@@ -8,3 +8,8 @@ export type createAccountParams ={
     email : string,
     password : string
 }
+
+export type loginUserParams = {
+    email :string ,
+    password : string
+}

@@ -1,6 +1,6 @@
 import UserModel from "../models/user.model";
 import { AuthenticationError } from "../errors/AuthenticationError";
-import { createAccountParams, loginUserParams } from "../dtos/user";
+import { createAccountParams, loginUserParams } from "../params/user.params";
 import jwt from 'jsonwebtoken';
 const secret = process.env.JWT_SECRET!;
 

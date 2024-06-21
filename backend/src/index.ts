@@ -1,14 +1,13 @@
-import express , { Request , Response } from 'express';
+import express  from 'express';
 import 'dotenv/config';
 import connectToDB from './db';
 import mongoose from 'mongoose';
 import Cors from 'cors';
 import cookieParser from 'cookie-parser';
-import authRoutes from './routes/auth';
 import { errorHandler } from './middlewares/errorHandler';
 const PORT = process.env.PORT;
 const app = express();
-
+import authRoutes from './routes/auth';
 
 //middlewares
 app.use(Cors());
@@ -18,7 +17,7 @@ app.use(express.urlencoded({ extended : true}));
 
 //routes
 app.use("/auth",authRoutes);
-//app.use("/problems",problemRouter);
+app.use("/problems",problemRouter);
 //app.use("/contests",contestRouter);
 
 

@@ -11,25 +11,24 @@ const signupSchema = z.object({
     email : z.string().email().min(1).max(255),
     password : z.string().min(6).max(255),
 })
-const loginSchema = z.object({
-    email: z.string().email().min(1).max(255),
-    password: z.string().min(6).max(255)
-})
-
-
 export async function  signupHandler( req : Request , res : Response ,next : NextFunction ){
     try{    
     const request = signupSchema.parse({
             ...req.body,
         })
-        const data = request 
+        const data = {
+            ...req.body
+        }
         const user = await createAccount(data);
         return setAuthCookies( res , user.accessToken).status(200).json({user});
     }catch(error){
         next(error);
     }
 }
-
+const loginSchema = z.object({
+    email: z.string().email().min(1).max(255),
+    password: z.string().min(6).max(255)
+})
 export async function loginHandler( req : Request , res : Response , next : NextFunction ){
     try{
         const request = loginSchema.parse({

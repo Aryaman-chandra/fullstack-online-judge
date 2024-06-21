@@ -1,12 +1,8 @@
 import { Router } from "express"
-import { isAuthenticated } from "../middlewares/isAuthenticated";
-import { editProfile, getProfile } from "../controllers/user.controller";
-const  userRoutes = Router();
+const  router = Router();
 
 // prefix url:/user/
-userRoutes.use(isAuthenticated);
-userRoutes.get("/profile",getProfile)
-userRoutes.post("/profile",editProfile);
-//userRoutes.post("/user/submission");
 
-export default userRoutes;
+router.get("/profile")
+router.post("/profile");
+router.post("/user/submission");

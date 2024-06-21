@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { compareValue, hashValue } from "../utils/bcrypt";
-import { defaults } from "../constants/defaults"
-export interface Profile{
+import defaults from "../constants/defaults.ts"
+interface Profile{
     fullname : string ,
     languages : string[],
     bio : string,
@@ -9,7 +9,6 @@ export interface Profile{
     social_media_links : { handle : string , url : string }[]
 }
 export interface UserDocument extends mongoose.Document{
-    _id : string,
     email : string,
     password : string,
     createdAt : Date,
@@ -23,7 +22,7 @@ export interface UserDocument extends mongoose.Document{
 const UserSchema = new mongoose.Schema<UserDocument>({
     email : { type : String , unique : true , required : true },
     password : { type : String , required : true },
-    profile :{
+    profile : [{
         fullname : {
             type : String, 
         },
@@ -40,7 +39,7 @@ const UserSchema = new mongoose.Schema<UserDocument>({
             handle : String , 
             url : String 
         }]
-    },
+    }],
     },
     {
         timestamps : true

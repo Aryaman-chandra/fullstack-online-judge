@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 export interface ProblemDocument extends mongoose.Document{
    title : string,
+   admin_id : mongoose.Types.ObjectId,
    statement : string, 
    sample : [ { input : string , output : string }]
    testcases : [ { input : string , output : string }]
@@ -13,6 +14,7 @@ export interface ProblemDocument extends mongoose.Document{
 
 const ProblemSchema = new mongoose.Schema<ProblemDocument>({
     title : { type : String , unique : true , required : true } , 
+    admin_id  : { type : mongoose.Schema.Types.ObjectId , ref : 'Users' },
     statement : { type : String , required : true } ,
     sample : [ { input : { type : String } , output : { type : String }}],
     testcases : [ { input : { type : String } , output : { type : String }}],

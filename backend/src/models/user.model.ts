@@ -15,6 +15,7 @@ export interface UserDocument extends mongoose.Document{
     createdAt : Date,
     updatedAt : Date,
     profile  : Profile, 
+    role : string[],
     comparePassword(val : string ): Promise<boolean>;
     omitPassword() : Pick<UserDocument,"email" | "_id"|"createdAt"| "updatedAt">
     generateUsername(): void
@@ -41,7 +42,8 @@ const UserSchema = new mongoose.Schema<UserDocument>({
             url : String 
         }]
     },
-    },
+    role :{ type : [String], default : ['user'] }
+},
     {
         timestamps : true
     },
@@ -69,5 +71,5 @@ UserSchema.methods.generateUsername = function(){
         this.username = `${prefix}+${suffix}`; 
     }
 }
-const UserModel = mongoose.model<UserDocument>("User",UserSchema);
+const UserModel = mongoose.model<UserDocument>("Users",UserSchema);
 export default UserModel;

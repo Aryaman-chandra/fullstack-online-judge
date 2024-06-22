@@ -9,6 +9,7 @@ const PORT = process.env.PORT;
 const app = express();
 import authRoutes from './routes/auth';
 import userRoutes from './routes/user';
+import problemRoutes from './routes/problem';
 //middlewares
 app.use(Cors());
 app.use(cookieParser());
@@ -18,7 +19,7 @@ app.use(express.urlencoded({ extended : true}));
 //routes
 app.use("/auth",authRoutes);
 app.use("/user",userRoutes);
-//app.use("/problems",problemRouter);
+app.use("/problems",problemRoutes);
 //app.use("/contests",contestRouter);
 
 

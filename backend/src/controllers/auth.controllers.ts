@@ -6,7 +6,7 @@ import { NextFunction, Request, Response } from "express";
 import { setAuthCookies } from "../utils/cookies";
 
 
-
+// Validation Schemas 
 const signupSchema = z.object({
     email : z.string().email().min(1).max(255),
     password : z.string().min(6).max(255),

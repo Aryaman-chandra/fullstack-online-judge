@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { compareValue, hashValue } from "../utils/bcrypt";
 import { defaults } from "../constants/defaults"
+
 export interface Profile{
     fullname : string ,
     languages : string[],
@@ -17,7 +18,7 @@ export interface UserDocument extends mongoose.Document{
     profile  : Profile, 
     role : string[],
     comparePassword(val : string ): Promise<boolean>;
-    omitPassword() : Pick<UserDocument,"email" | "_id"|"createdAt"| "updatedAt">
+    omitPassword() : Omit<UserDocument,"password">
     generateUsername(): void
 }
 

@@ -2,7 +2,7 @@ import { Request, Response,  NextFunction } from "express";
 import z from "zod";
 import UserModel from "../models/user.model";
 import { AuthenticationError } from "../errors/AuthenticationError";
-
+// Validation Schemas
 const profileSchema = z.object({
       fullname : z.string(),
       languages : z.string().array(),

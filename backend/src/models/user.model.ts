@@ -11,8 +11,10 @@ export interface Profile{
 }
 export interface UserDocument extends mongoose.Document{
     _id : string,
+    username : string,
     email : string,
     password : string,
+    refresh_token : string,
     createdAt : Date,
     updatedAt : Date,
     profile  : Profile, 
@@ -23,8 +25,10 @@ export interface UserDocument extends mongoose.Document{
 }
 
 const UserSchema = new mongoose.Schema<UserDocument>({
+    username : { type : String , unique :  true , required : true }, 
     email : { type : String , unique : true , required : true },
     password : { type : String , required : true },
+    refresh_token : { type : String , default : ''},
     profile :{
         fullname : {
             type : String, 

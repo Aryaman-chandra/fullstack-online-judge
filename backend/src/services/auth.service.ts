@@ -3,6 +3,7 @@ import { AuthenticationError } from "../errors/AuthenticationError";
 import { createAccountParams, loginUserParams } from "../params/user.params";
 import jwt from 'jsonwebtoken';
 const secret = process.env.JWT_SECRET!;
+const refreshSecret = process.env.JWT_REFRESH_SECRET!;
 
 
 export const createAccount = async(data : createAccountParams) => {
@@ -10,12 +11,17 @@ export const createAccount = async(data : createAccountParams) => {
     
     if(existingUser) throw new AuthenticationError('User Already Exists');
 
-    const user = await  UserModel.create({email : data.email , password : data.password});
+    const user = await  UserModel.create({username: data.username , email : data.email , password : data.password});
     const tokenUser= user.omitPassword();
     const accessToken = jwt.sign(  {tokenUser}, secret,{
+        expiresIn: "15m"
+    });
+    const refreshToken = jwt.sign({ tokenUser } , refreshSecret , {
         expiresIn: "30d"
     });
-    return { accessToken , tokenUser};
+    user.refresh_token = refreshToken;
+    await user.save();
+    return { refreshToken , accessToken , user};
 }
 
 export const login = async( data: loginUserParams )=>{
@@ -27,7 +33,13 @@ export const login = async( data: loginUserParams )=>{
     if(!result) throw new AuthenticationError('Wrong Email or Password');
     const tokenUser = user.omitPassword();
     const accessToken  = jwt.sign(  {tokenUser}, secret,{
-        expiresIn: "30d"
+        expiresIn: "15m"
     });
-    return { accessToken , tokenUser };
+    var refreshToken =user.refresh_token;
+    if(!user.refresh_token){
+        refreshToken = jwt.sign({ tokenUser } , refreshSecret , {
+            expiresIn: "30d"
+        });
+    }
+    return { accessToken , tokenUser , refreshToken };
 }

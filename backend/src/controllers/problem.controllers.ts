@@ -13,6 +13,7 @@ const problemSchema = z.object({
     time_limit : z.number(),
     memory_limit : z.number()
 })
+
 export const createProblem = async (req : Request , res : Response , next:NextFunction)=>{
     try{
         var result = problemSchema.parse({
@@ -28,6 +29,7 @@ export const createProblem = async (req : Request , res : Response , next:NextFu
         next(error);
     }
 }
+
 export const getThisProblem = async (req : Request , res : Response , next:NextFunction)=>{
     try{
         if(!req.params.p_id) throw new BadRequestError("Problem id is missing");
@@ -39,6 +41,7 @@ export const getThisProblem = async (req : Request , res : Response , next:NextF
         next(error);
     }
 }
+
 export const fetchProblems =  async (req : Request , res : Response , next:NextFunction)=>{
     try{
         if(!req.query.page) throw new BadRequestError("Page not found");
@@ -51,12 +54,16 @@ export const fetchProblems =  async (req : Request , res : Response , next:NextF
         const  pages = Math.ceil(total/pagesize);
         query = query.skip(skip).limit(pagesize);
         const result = await query;
+        var data = [];
+        for(var index in result){
+            data.push(result[index].preview());
+        }
         return res.status(200).json({
             status : "success",
             count : result.length,
             page,
             pages,
-            data:result
+            data: data
         })
     }catch(error){
         next(error);

@@ -7,7 +7,7 @@ const problemRoutes = Router();
 
 problemRoutes.get("/" ,fetchProblems);
 problemRoutes.get("/:p_id" ,getThisProblem);
-problemRoutes.post("/create/", isAuthenticated , authorizeTo(["admin","user"]) , createProblem);
+problemRoutes.post("/create/", isAuthenticated , authorizeTo(["admin"]) , createProblem);
 
 export default problemRoutes;
 

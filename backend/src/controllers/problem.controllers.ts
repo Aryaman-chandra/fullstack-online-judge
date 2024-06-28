@@ -36,7 +36,7 @@ export const getThisProblem = async (req : Request , res : Response , next:NextF
         const problem = await ProblemModel.findById(req.params.p_id);
         if(!problem) throw new BadRequestError("Problem not found");
         const details =  problem.omitTestCases();
-        res.status(200).json({details});
+        res.status(200).json({...details});
     }catch(error){
         next(error);
     }

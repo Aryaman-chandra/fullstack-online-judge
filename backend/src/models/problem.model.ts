@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 export interface ProblemDocument extends mongoose.Document{
+    _id : string,
    title : string,
    admin_id : mongoose.Types.ObjectId,
    statement : string, 
@@ -11,7 +12,7 @@ export interface ProblemDocument extends mongoose.Document{
    time_limit : number,
    memory_limit : number,
    omitTestCases():Omit<ProblemDocument,"testcases" | "admin_id">
-   preview() : Pick<ProblemDocument ,"title" | "tags" | "difficulty">
+   preview() : Pick<ProblemDocument ,"_id"|"title" | "tags" | "difficulty">
    // Optional field to support Markdown
    //isMarkdown : boolean
 }
@@ -27,9 +28,10 @@ const ProblemSchema = new mongoose.Schema<ProblemDocument>({
     time_limit : { type : Number , required : true } ,
     memory_limit :{ type : Number , required : true }, 
 })
+
 ProblemSchema.methods.preview = function(){
     const problem = this.toObject();
-    const allowed = ['title' , 'tags' , 'difficulty'];
+    const allowed = ['_id','title' , 'tags' , 'difficulty'];
     return Object.keys(problem).filter(key => allowed.includes(key))
   .reduce((obj, key) => {
     return {
@@ -38,6 +40,7 @@ ProblemSchema.methods.preview = function(){
     };
   }, {});
 }
+
 ProblemSchema.methods.omitTestCases = function (){
     const problem = this.toObject();
     delete problem.testcases;

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { compareValue, hashValue } from "../utils/bcrypt";
 import { defaults } from "../constants/defaults"
+
 export interface Profile{
     fullname : string ,
     languages : string[],
@@ -10,19 +11,24 @@ export interface Profile{
 }
 export interface UserDocument extends mongoose.Document{
     _id : string,
+    username : string,
     email : string,
     password : string,
+    refresh_token : string,
     createdAt : Date,
     updatedAt : Date,
     profile  : Profile, 
+    role : string[],
     comparePassword(val : string ): Promise<boolean>;
-    omitPassword() : Pick<UserDocument,"email" | "_id"|"createdAt"| "updatedAt">
+    omitPassword() : Omit<UserDocument,"password">
     generateUsername(): void
 }
 
 const UserSchema = new mongoose.Schema<UserDocument>({
+    username : { type : String , unique :  true , required : true }, 
     email : { type : String , unique : true , required : true },
     password : { type : String , required : true },
+    refresh_token : { type : String , default : ''},
     profile :{
         fullname : {
             type : String, 
@@ -41,7 +47,8 @@ const UserSchema = new mongoose.Schema<UserDocument>({
             url : String 
         }]
     },
-    },
+    role :{ type : [String], default : ['user'] }
+},
     {
         timestamps : true
     },
@@ -69,5 +76,5 @@ UserSchema.methods.generateUsername = function(){
         this.username = `${prefix}+${suffix}`; 
     }
 }
-const UserModel = mongoose.model<UserDocument>("User",UserSchema);
+const UserModel = mongoose.model<UserDocument>("Users",UserSchema);
 export default UserModel;

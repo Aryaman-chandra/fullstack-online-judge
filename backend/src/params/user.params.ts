@@ -5,7 +5,8 @@ in the type params
 */
 export type createAccountParams ={
     email : string,
-    password : string
+    password : string,
+    username : string
 }
 
 export type loginUserParams = {

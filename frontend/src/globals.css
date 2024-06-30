@@ -2,7 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-  
+/* Track */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+/* Apply the gradient to the scrollbar track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Customize the scrollbar handle (thumb) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(100deg, rgba(255, 0, 0, 0) 0%, rgba(219, 29, 55, 0.973) 100%);
+  border-radius: 15px;
+  max-height: 5px;
+  box-shadow: 0px 0px 0px 100000vh black; /* This covers the entire scrollbar area */
+}
+::-webkit-scrollbar-corner{
+    color: transparent
+}
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -76,5 +76,5 @@ UserSchema.methods.generateUsername = function(){
         this.username = `${prefix}+${suffix}`; 
     }
 }
-const UserModel = mongoose.model<UserDocument>("Users",UserSchema);
+const UserModel = mongoose.model<UserDocument>("users",UserSchema);
 export default UserModel;

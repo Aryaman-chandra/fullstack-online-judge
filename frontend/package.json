@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
+    "@monaco-editor/react": "^4.6.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-navigation-menu": "^1.2.0",
     "@radix-ui/react-separator": "^1.1.0",
@@ -24,8 +25,10 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.0",
+    "react-markdown": "^9.0.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.23.1",
+    "react-spinners": "^0.14.1",
     "tailwind-merge": "^2.3.0",
     "zod": "^3.23.8"
   },

@@ -4,7 +4,7 @@ import ServerError from '@/lib/utils/serverError'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 
  interface problems{
-  data : {title :string , tags:string[], difficulty:string}[]
+  data : {_id:string ,title :string , tags:string[], difficulty:string}[]
 }
 const Problems = () => {
   var page:number = 1;
@@ -25,9 +25,7 @@ const Problems = () => {
       ) : (
         <div className='flex-col justify-between space-y-7 '>
           {data.data.map((project,index) => (
-              <>
-                <ProblemCard key={index} title={project.title} tags={project.tags} difficulty={project.difficulty}/>
-             </>
+                <ProblemCard key={index} _id={project._id} title={project.title} tags={project.tags} difficulty={project.difficulty}/>
            ))}
         </div>
       )}

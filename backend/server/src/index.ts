@@ -10,6 +10,7 @@ const app = express();
 import authRoutes from './routes/auth';
 import userRoutes from './routes/user';
 import problemRoutes from './routes/problem';
+import submissionRoutes from './routes/submission';
 //middlewares
 const options = {
     origin : "http://localhost:5173",
@@ -23,6 +24,7 @@ app.use(cors(options));
 app.use("/auth",authRoutes);
 app.use("/user",userRoutes);
 app.use("/problems",problemRoutes);
+app.use("/submissions",submissionRoutes);
 //app.use("/contests",contestRouter);
 
 

@@ -14,7 +14,7 @@ const App = () => {
   return (
     <AuthContext.Provider value={{isAuthenticated , setAuthenticated}}>
     <QueryClientProvider client={queryClient}>
-    <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
+    <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
        <main className=' flex-col h-screen '>
               <RouterProvider router={router}/>
             </main>

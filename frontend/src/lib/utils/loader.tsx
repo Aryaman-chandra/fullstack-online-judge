@@ -1,7 +1,7 @@
-import { BarLoader } from 'react-spinners'
-export const Loader = (props:{height:string  , isLoading:boolean }) => {
+import { CircleLoader } from 'react-spinners'
+export const Loader = (props:{ isLoading:boolean }) => {
   return (
-      <BarLoader height={props.height} className='fixed top-[w/2] left-[h/2]' color={"e11d48"} loading={props.isLoading}/>
+      <CircleLoader className="justify-self-center self-center" color="#e11d48" size={50} loading={props.isLoading}/>
   )
 }
 

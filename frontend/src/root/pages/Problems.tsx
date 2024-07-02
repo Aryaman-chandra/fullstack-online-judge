@@ -23,7 +23,7 @@ const Problems = () => {
       ) : isError ? (
         <div>Error: {error.message}</div>
       ) : (
-        <div className='flex-col justify-between space-y-7 '>
+        <div className='flex flex-col justify-between items-center space-y-5 '>
           {data.data.map((project,index) => (
                 <ProblemCard key={index} _id={project._id} title={project.title} tags={project.tags} difficulty={project.difficulty}/>
            ))}

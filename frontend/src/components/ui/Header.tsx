@@ -8,7 +8,7 @@ const Header = () => {
         </NavigationMenuItem>
   })
   return (
-        <NavigationMenu className='h-14'>
+        <NavigationMenu className='h-10'>
       <NavigationMenuList>
         {headerList}
       </NavigationMenuList>

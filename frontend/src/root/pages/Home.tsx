@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
   const Home = () => {
     const {isAuthenticated} = useContext(AuthContext);
     const navigate = useNavigate();
-    console.log(isAuthenticated)
     const goSignUp = ()=>{
       navigate("/auth/sign-in")
     }

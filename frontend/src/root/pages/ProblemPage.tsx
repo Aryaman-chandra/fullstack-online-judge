@@ -32,7 +32,7 @@ const options = {
         img:{
             component : MyImage,
             props :{
-                className:'h-md w-md md:h-sm md:max-w-lg max-h-90h self-center'
+                className:'h-sm w-md md:h-sm md:max-w-lg max-h-90h self-center'
             }
         },
         p:{
@@ -44,7 +44,7 @@ const options = {
         code:{
             component: MyCodeBlock,
             props:{
-                className: 'bg-secondary rounded-md my-4 text-foreground px-5'
+                className: 'bg-secondary md:w-[400px] rounded-md my-4 text-foreground p-5'
             }
         }
     }
@@ -58,7 +58,7 @@ const ProblemPage = () => {
           return data
       }
   })
-  if(result.isPending)  return <Loader height='4px' isLoading={true}/> 
+  if(result.isPending)  return <div className='h-full w-full flex'><Loader isLoading={true}/></div> 
   if(result.isError) return <div className='text-red-800'>{result.error.message}</div>
   return (
     <div className='flex flex-col  items-center mx-10 md:grid md:grid-cols-5 md:grid-rows-3 md:gap-3 md:grid-flow-col md:p-2 h-full'>

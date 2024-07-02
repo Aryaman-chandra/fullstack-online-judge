@@ -3,7 +3,7 @@ import { Button } from "./button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
 import { Textarea } from "./textarea"
 import { Loader } from "@/lib/utils/loader"
-import { submitSolution } from "@/lib/api"
+import { runCode, submitSolution } from "@/lib/api"
 import { useMutation } from "@tanstack/react-query"
 
 
@@ -13,16 +13,19 @@ const CodeOutputTab = (payload:{
   p_id : string
 }) => {
     const [value,setValue] = useState('');
-    const [errorA , setErrorA] = useState('');
     const onSubmit = async(data:any)=>{
-      const result = await submitSolution(data); 
+      let result:any;
+      console.log(data.payload)
+      if(data.key==1)  result = await submitSolution(data.payload); 
+      else result = await runCode(data.payload);
       return result.data;
+      
   }
   const submiMutation = useMutation({
       mutationFn : onSubmit,
       onSuccess:(result)=>{ return result.data },
       onError:(err:Error)=>{
-        setErrorA(err.message)
+        console.log(err);
       }
   });
   return (
@@ -40,12 +43,12 @@ const CodeOutputTab = (payload:{
         </TabsContent>
         <TabsContent className="h-[80%]" value="Output">
         {submiMutation.isPending? <div className="flex h-full w-full justify-center items-center"><Loader isLoading={submiMutation.isPending}/></div>:
-        <Textarea className="w-full h-48 max-h-[90%] text-gray-400 mt-4 mx-1 p-3 resize-none" disabled={true} />}
+        <Textarea className="w-full h-48 max-h-[90%] text-gray-400 mt-4 mx-1 p-3 resize-none" disabled={true} value={submiMutation.isSuccess? submiMutation.data:''}/>}
         </TabsContent>
       </Tabs>
       <div className="mt-3 space-x-6">
-        <Button>Run</Button>
-        <Button onClick={()=>submiMutation.mutate(payload.payload)}>Submit</Button>
+        <Button onClick={()=>{submiMutation.mutate({payload:{code : payload.payload.code , language: payload.payload.language , testcases:value} , key: 2})}}>Run</Button>
+        <Button onClick={()=>submiMutation.mutate({ payload:payload.payload , key: 1})}>Submit</Button>
       </div>
     </div>
   );

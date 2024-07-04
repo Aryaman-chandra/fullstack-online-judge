@@ -1,5 +1,8 @@
 export default interface executioner{
-    command:string
-    getCommand(filename:string):string
+    compileCommand:string;
+    executeCommand:string;
+    jobId: string;
+    compile():Promise<void>
+    run(input:string):Promise<string>
     execute(input :string):Promise<string>
 }

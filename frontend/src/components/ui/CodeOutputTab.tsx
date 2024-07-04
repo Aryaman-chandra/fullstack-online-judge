@@ -24,7 +24,13 @@ const CodeOutputTab = (payload:{
   }
   const mutation = useMutation({
       mutationFn : onSubmit,
-      onSuccess:(result)=>{  setOutput(result.output); return result},
+      onSuccess:(result)=>{  
+          if (result.status===200) 
+          setOutput(result.output); 
+          else 
+          setOutput(result.output.message);
+          return result
+      },
       onError:(err:Error)=>{
         console.log(err);
       }

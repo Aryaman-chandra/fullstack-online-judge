@@ -14,20 +14,15 @@ import { Input } from "@/components/ui/input"
 import { SignupValidation } from '@/lib/validation';
 import { signup } from "@/lib/api";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react"
 import ServerError from "@/lib/utils/serverError";
-import { useContext } from "react";
-import { AuthContext } from "@/config/contexts/AuthContext";
 const SignupForm = () => {
     // 1. Define your form.
     const navigate = useNavigate();
-    const {setAuthenticated} = useContext(AuthContext)
     const {mutate, isPending ,isError, error } = useMutation({
         mutationFn : signup,
         onSuccess: ()=>{
-
-            setAuthenticated(true);
             navigate('/home',{replace : true});
         },
         onError:(err)=>{
@@ -90,6 +85,9 @@ const SignupForm = () => {
               </FormItem>
             )}
           />
+          <div className="w-full h-3 flex justify-end">
+          <NavLink to={"/auth/sign-in"} className="text-primary text-xs" replace={true}>Already have an Account?</NavLink>
+          </div>
           {isPending?  <Button disabled> <Loader2 className="mr-2 h-4 w-4 animate-spin" />Please wait</Button>:  <Button type="submit" >Sign Up</Button>}
         </form>
       </Form>

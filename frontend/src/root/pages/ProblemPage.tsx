@@ -32,7 +32,7 @@ const options = {
         img:{
             component : MyImage,
             props :{
-                className:'h-sm w-md md:h-sm md:max-w-lg max-h-90h self-center'
+                className:'h-sm w-sm md:max-w-lg max-h-90h self-center'
             }
         },
         p:{
@@ -51,6 +51,7 @@ const options = {
 }
 const ProblemPage = () => {
   let { state } = useLocation();
+  if(!state) state = { p_id : window.location.pathname.split('/').pop()};
   const result:{isPending : boolean , isError: boolean , error : any , data : any} = useQuery({
       queryKey: [state.p_id],
       queryFn : () => {

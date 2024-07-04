@@ -48,7 +48,7 @@ export async function loginHandler( req : Request , res : Response , next : Next
 export  function logoutHandler( req: Request , res: Response , next: NextFunction ){
         try{
         if(!req.cookies.token) throw new AuthenticationError('No logged in Session');
-        return res.cookie('token','', { maxAge: 15}).status(200).send();
+        return res.cookie('token','', { maxAge: 15}).clearCookie('refreshToken',{path :"/auth/refresh"}).status(200).send();
         }catch(error){
             next(error);
         }

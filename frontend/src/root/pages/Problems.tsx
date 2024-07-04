@@ -1,5 +1,6 @@
 import ProblemCard from '@/components/ui/ProblemCard'
 import { getProblems } from '@/lib/api'
+import { Loader } from '@/lib/utils/loader'
 import ServerError from '@/lib/utils/serverError'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 
@@ -17,9 +18,9 @@ const Problems = () => {
     placeholderData:keepPreviousData
   })
   return (
-    <div>
+    <div className='h-full w-full'>
       {isPending ? (
-        <div>Loading...</div>
+        <div className='h-full w-full'><Loader isLoading={isPending} /></div>
       ) : isError ? (
         <div>Error: {error.message}</div>
       ) : (

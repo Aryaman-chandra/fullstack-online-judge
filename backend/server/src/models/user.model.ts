@@ -5,8 +5,8 @@ import { defaults } from "../constants/defaults"
 export interface Profile{
     fullname : string ,
     languages : string[],
-    bio : string,
-    picture : string , 
+    bio? : string ,
+    picture? : string, 
     social_media_links : { handle : string , url : string }[]
 }
 export interface UserDocument extends mongoose.Document{

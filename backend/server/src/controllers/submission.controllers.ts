@@ -25,7 +25,8 @@ export const newSubmission  = async ( req : Request , res: Response , next : Nex
             ...req.body,
         })
         const submission = await SubmissionModel.create({ user : req.user.id , source : valid.code } );
-        const problem = await ProblemModel.findById(req.query.p_id);
+        const p_id: string = req.params.p_id;
+        const problem = await ProblemModel.findById(p_id);
         if(!problem) throw new BadRequestError('Problem Not Found');
         const executeJob :Executable= {
             code :  valid.code,
@@ -42,7 +43,7 @@ export const newSubmission  = async ( req : Request , res: Response , next : Nex
 export const runTestCases = async ( req : Request , res: Response , next : NextFunction)=>{
     try{
         const valid = { ...req.body } ;
-        const inputData = valid.testcases.map((testcase:any)=>{ return testcase.input})
+        const inputData:string[] = [req.body.testcases]; 
         const executeJob : Executable = {
             code : valid.code ,
             language : valid.language,

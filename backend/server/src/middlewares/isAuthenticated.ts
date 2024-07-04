@@ -6,11 +6,9 @@ import { User } from "../dtos/user";
 var secret: string = process.env.JWT_SECRET!;
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
     try {
-            //check for toke 
-            if (req.cookies.token == undefined) throw new AuthenticationError("UnAuthorized");
             const   decoded = jwt.verify(req.cookies.token, secret);
             // check for valid token
-            if(typeof decoded == "string") throw new AuthenticationError("invalid token");
+            if(typeof decoded == "string") throw new AuthenticationError("Invalid token");
             //attach user
             const user = await UserModel.findOne({ email: decoded.tokenUser.email })
            req.user = user as User;
@@ -18,9 +16,8 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 
     } catch (error) {
         if(error instanceof TokenExpiredError || error instanceof JsonWebTokenError){
-            next(new AuthenticationError('token expired'));
+           return next(new AuthenticationError('Invalid token'));
         }   
-        else
         next(error);
     }
 }

@@ -12,23 +12,21 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { SigninValidation } from "@/lib/validation";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/lib/api";
 import { Loader2 } from "lucide-react";
 import ServerError from "@/lib/utils/serverError";
-import { useContext } from "react";
-import { AuthContext } from "../../config/contexts/AuthContext";
 
 
 const SigninForm = () => {
+  const location = useLocation();
   const navigate = useNavigate();
-  const { setAuthenticated } = useContext(AuthContext);
+  const redirectUrl = location.state?.redirectUrl || "/home" 
   const {mutate, isPending ,isError, error } = useMutation({
       mutationFn : login,
       onSuccess: ()=>{
-          setAuthenticated(true);
-          navigate('/home',{replace : true});
+          navigate(redirectUrl,{replace : true});
       },
       onError:(err)=>{
         console.log((err));
@@ -79,6 +77,9 @@ const SigninForm = () => {
           </FormItem>
         )}
       />
+      <div className="w-full h-2 flex justify-end">
+      <NavLink to={"/auth/sign-up"} className="text-primary text-xs" replace={true}>Don't have an Account?</NavLink>
+      </div>
       {isPending?  <Button disabled> <Loader2 className="mr-2 h-4 w-4 animate-spin" />Please wait</Button>:  <Button type="submit" >Sign Up</Button>}
     </form>
   </Form>

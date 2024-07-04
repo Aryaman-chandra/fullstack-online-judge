@@ -6,10 +6,26 @@ import { AuthenticationError } from "../errors/AuthenticationError";
 const profileSchema = z.object({
       fullname : z.string(),
       languages : z.string().array(),
-      bio : z.string(),
-      picture : z.string(),
+      bio : z.string().optional(),
+      picture : z.string().optional(),
       social_media_links : z.object({ handle : z.string() , url : z.string()}).array()
 })
+
+
+export const userDetails = async ( req : Request , res : Response , next : NextFunction )=>{
+    try{
+        const   { username , role , profile}= req.user;
+        const details = {
+            username,
+            role,
+            profile,
+        }
+        return res.status(200).json(details);
+    }catch(error){
+        next(error);
+    }
+}
+
 export const getProfile = async ( req : Request , res : Response , next : NextFunction )=>{
        try{
        return res.status(200).json({ profile : req.user.profile }); 

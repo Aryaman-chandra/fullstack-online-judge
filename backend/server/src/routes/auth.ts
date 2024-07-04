@@ -5,6 +5,6 @@ const   authRoutes = Router();
 // prefix auth
 authRoutes.post("/signup",signupHandler)
 authRoutes.post("/login",loginHandler)
-authRoutes.post("/logout",logoutHandler)
+authRoutes.get("/logout",logoutHandler)
 authRoutes.get("/refresh/",refreshAccessToken);
 export default authRoutes;

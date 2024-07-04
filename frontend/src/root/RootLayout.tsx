@@ -1,7 +1,10 @@
 import Header from "@/components/ui/Header"
-import { Outlet } from "react-router-dom"
+import { setNavigate } from "@/lib/navigation";
+import { Outlet, useNavigate } from "react-router-dom"
 
 const RootLayout = () => {
+  const navigate = useNavigate();
+  setNavigate(navigate);
   return (
     <>
     <Header/>

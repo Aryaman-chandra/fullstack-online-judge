@@ -9,6 +9,7 @@ export interface ProblemDocument extends mongoose.Document{
    testcases : [ { input : string , output : string }],
    difficulty : string,
    tags : string[],
+   type : string, 
    time_limit : number,
    memory_limit : number,
    omitTestCases():Omit<ProblemDocument,"testcases" | "admin_id">
@@ -19,13 +20,14 @@ export interface ProblemDocument extends mongoose.Document{
 }
 
 const ProblemSchema = new mongoose.Schema<ProblemDocument>({
-    title : { type : String , unique : true , required : true } , 
+    title : { type : String ,   required : true } , 
     admin_id  : { type : mongoose.Schema.Types.ObjectId , ref : 'users' },
     statement : { type : String , required : true } ,
     sample : [ { input : { type : String } , output : { type : String }}],
     testcases : [ { input : { type : String } , output : { type : String }}],
     difficulty : { type : String , enum : ['Easy' , 'Medium' , 'Hard'] }, 
     tags : [{type : String}],
+    type : { type : String , enum : ['contest' , 'practice'] , default : 'practice'},
     time_limit : { type : Number , required : true } ,
     memory_limit :{ type : Number , required : true }, 
 })

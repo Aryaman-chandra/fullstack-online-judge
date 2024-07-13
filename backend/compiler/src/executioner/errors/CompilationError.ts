@@ -11,6 +11,6 @@ export class CompilationError extends CompilerError{
         this.statusCode = code;
     }
     serialize(){
-        return { status_code  : this.statusCode , message : this.message };
+        return { statusCode  : this.statusCode , output : this.message };
     }
 }

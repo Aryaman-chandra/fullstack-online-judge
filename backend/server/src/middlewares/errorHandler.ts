@@ -15,6 +15,6 @@ export const errorHandler : ErrorRequestHandler =(
         return res.status(400).json({ type : "Validation Error" , message : error.flatten() });
     }
     else 
-    return res.status(500).json({message : error.message});
+    return res.status(500).json({message : error.message , stack : error.stack});
 
 };

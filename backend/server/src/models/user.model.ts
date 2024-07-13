@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import { compareValue, hashValue } from "../utils/bcrypt";
 import { defaults } from "../constants/defaults"
 
@@ -19,8 +19,6 @@ export interface UserDocument extends mongoose.Document{
     updatedAt : Date,
     profile  : Profile, 
     role : string[],
-    links: { source : mongoose.Types.ObjectId , target : mongoose.Types.ObjectId }[];
-    nodes: { title :string , id  : string, group : string }[];
     comparePassword(val : string ): Promise<boolean>;
     omitPassword() : Omit<UserDocument,"password">
     generateUsername(): void
@@ -49,31 +47,8 @@ const UserSchema = new mongoose.Schema<UserDocument>({
             url : String 
         }]
     },
-    role :{ type : [String], default : ['user'] },
-    links : [{
-        type : {
-        source : {
-            type : mongoose.SchemaTypes.ObjectId,
-            ref : 'problems',
-        },
-        target : {
-            type : mongoose.SchemaTypes.ObjectId,
-            ref : 'problems'
-        }}
-    }],
-    nodes :[{ 
-        type : {
-        title:{
-            type :String
-        },
-        id : {
-            type : String,
-        },
-        group : {
-            type: String
-        }
-        }}]
-    },
+    role :{ type : [String], default : ['user'] }
+},
     {
         timestamps : true
     },
@@ -89,13 +64,11 @@ UserSchema.pre('save', async function(next){
 UserSchema.methods.comparePassword = async function (val :string ):Promise<boolean>{
     return await compareValue(val , this.password);
 }
-
 UserSchema.methods.omitPassword = function (){
     const user = this.toObject();
     delete user.password;
     return user;
 }
-
 UserSchema.methods.generateUsername = function(){
     if(!this.username){
         var suffix = Math.floor(Math.random()*1000);

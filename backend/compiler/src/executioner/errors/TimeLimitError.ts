@@ -11,6 +11,6 @@ export class TimeLimitError extends CompilerError{
         this.statusCode = code;
     }
     serialize(){
-        return { statusCode: this.statusCode , output : this.message };
+        return { status_code  : this.statusCode , message : this.message };
     }
 }

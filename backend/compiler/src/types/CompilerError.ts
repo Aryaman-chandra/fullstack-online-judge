@@ -7,5 +7,5 @@ export abstract class CompilerError extends Error{
     }
     abstract statusCode : number | string ;
     abstract setStatuscode(code:number|string) : void;
-    abstract serialize() : { statusCode: string | number ,  output : string } ;
+    abstract serialize() : { status_code: string | number ,  message : string } ;
 }

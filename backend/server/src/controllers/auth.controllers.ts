@@ -5,8 +5,6 @@ import { createAccount, login } from "../services/auth.service";
 import { NextFunction, Request, Response } from "express";
 import { setAuthCookies } from "../utils/cookies";
 import  jwt, { JsonWebTokenError, TokenExpiredError }  from "jsonwebtoken";
-import UserModel from "../models/user.model";
-import { DataBaseError } from "../errors/DatabaseError";
 const refreshSecret = process.env.JWT_REFRESH_SECRET!;
 const  secret = process.env.JWT_SECRET!;
 
@@ -49,6 +47,7 @@ export async function loginHandler( req : Request , res : Response , next : Next
 }
 export  function logoutHandler( req: Request , res: Response , next: NextFunction ){
         try{
+        if(!req.cookies.token) throw new AuthenticationError('No logged in Session');
         return res.cookie('token','', { maxAge: 15}).clearCookie('refreshToken',{path :"/auth/refresh"}).status(200).send();
         }catch(error){
             next(error);
@@ -56,7 +55,7 @@ export  function logoutHandler( req: Request , res: Response , next: NextFunctio
 }
 export function refreshAccessToken(req:Request , res: Response , next: NextFunction){
        try{
-           if(req.cookies.refreshToken===undefined) throw new AuthenticationError('Session Expired ! Please login instead');
+           if(req.cookies.refreshToken==undefined) throw new AuthenticationError('Session Expired ! Please login instead');
            const decoded = jwt.verify(req.cookies.refreshToken , refreshSecret );
            const token = jwt.sign(decoded , secret);
            return setAuthCookies(res , token , req.cookies.refreshToken).status(200).json({user:{token ,refreshToken:req.cookies.refreshToken}});

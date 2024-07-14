@@ -19,7 +19,7 @@ export  const ProfileSchema = z.object({
   
 export const problemSchema = z.object({
   title: z.string().min(4).max(12),
-  statement: z.string().min(15).max(300),
+  statement: z.string().min(15),
   testcases: z.array(z.object({
     input: z.instanceof(File),
     output: z.instanceof(File)
@@ -34,7 +34,7 @@ export const contestSchema = z.object({
   end_time: z.string(),
   problems: z.array(z.object({
     title: z.string().min(4).max(25),
-    statement: z.string().min(15).max(300),
+    statement: z.string().min(15),
     difficulty: z.enum(["Easy", "Medium", "Hard"]),
     points: z.number().positive(),
     time_limit: z.number().positive(),

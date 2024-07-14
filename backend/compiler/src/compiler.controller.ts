@@ -9,6 +9,11 @@ import z from "zod"
 import { MemoryLimitError } from "./executioner/errors/MemoryLimitError";
 import { SUCCESS } from "./constants";
 
+const extensions = {
+    "cpp" : "cpp",
+    "java": "java",
+    "python":"py"
+}
 const JobSchema = z.object({
     code : z.string().min(1),
     input : z.array(z.string().min(1)),
@@ -19,7 +24,7 @@ const JobSchema = z.object({
 export const execute = async ( req: Request<any, any , Job> , res : Response , next : NextFunction) =>{
     try{
         const valid = JobSchema.parse({ ...req.body });
-        const filePath =  generateOutputFile(valid.language , valid.code);
+        const filePath =  generateOutputFile(extensions[valid.language] , valid.code);
         const result:executioner = executionerFactory.get(filePath,valid.language , Math.min(valid.time_limit ?? 5,12) , Math.min(valid.memory_limit ?? 128,128)); 
         let output : string[]= [];
         for(var index in valid.input){
@@ -36,7 +41,7 @@ export const execute = async ( req: Request<any, any , Job> , res : Response , n
         }
         return res.status(200).json({ statusCode : SUCCESS , output   } );        
     }catch(error:any){
-        let body:any = { status_code : 400 , message : error.message } ;
+        let body:any = { status_code : 400 , output : error.message } ;
         if(error instanceof CompilationError) body = error.serialize();
         if(error instanceof TimeLimitError) body  = error.serialize();
         if(error instanceof MemoryLimitError) body = error.serialize();

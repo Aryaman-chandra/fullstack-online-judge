@@ -1,8 +1,5 @@
 {
     "buildCommand": "npm run build",
     "outputDirectory": "dist",
-    "framework": "vite",
-    "environment": {
-      "VITE_IGNORE_TS_ERRORS": "true"
-    }
+    "framework": "vite"
   }

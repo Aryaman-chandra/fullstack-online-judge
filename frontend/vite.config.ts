@@ -9,4 +9,11 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+  },
+  define: {
+    'process.env.VITE_IGNORE_TS_ERRORS': JSON.stringify(process.env.VITE_IGNORE_TS_ERRORS)
+  }
+
 })

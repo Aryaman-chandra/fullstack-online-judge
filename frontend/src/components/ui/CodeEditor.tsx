@@ -2,6 +2,7 @@ import Editor, { Monaco } from '@monaco-editor/react'
 import { useRef, useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select';
 import CodeOutputTab from './CodeOutputTab';
+import { snippets } from '@/lib/utils/constants';
 function CodeEditor(problem:string) {
 
     const editorRef = useRef()
@@ -22,16 +23,15 @@ function CodeEditor(problem:string) {
         setValue(value)
     }
 
-    const onRun = ()=>{}
     
 
   return (
     <>
       <div className=" w-full justify-center mx-6 md:mx-0  md:col-span-2 md:row-span-2 md:w-full md:h-full">
         <div className="w-full h-full flex flex-col ">
-          <Select onValueChange={(value) => setLanguage(value)}>
+          <Select onValueChange={(value) => { setLanguage(value); setValue(snippets[value])}}>
             <SelectTrigger className="md:w-[150px]">
-              <SelectValue placeholder="language" />
+              <SelectValue placeholder="language" defaultValue={"cpp"} />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="cpp">C++</SelectItem>
@@ -46,7 +46,7 @@ function CodeEditor(problem:string) {
             theme="vs-dark"
             defaultLanguage="cpp"
             language={language}
-            defaultValue="//Enter your code here"
+            defaultValue="// Enter your code here"
             onMount={onMount}
             value={value}
             onChange={onChange}

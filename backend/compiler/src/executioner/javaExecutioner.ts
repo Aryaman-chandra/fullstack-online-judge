@@ -1,3 +1,4 @@
+const fs = require('fs').promises;
 import { exec, spawn } from "node:child_process";
 import executioner from "../types/executioner"
 import path from "path";
@@ -66,7 +67,8 @@ export default class javaExecutioner implements executioner {
         }
 
         const fullExecuteCommand = `${this.executeCommand} ${this.mainClass}`;
-        return new Promise((resolve, reject) => {
+        const fileContents = await fs.readFile(input, 'utf8');
+        return new Promise( (resolve, reject) => {
             const child = spawn('sh', ['-c', fullExecuteCommand], {
                 stdio: ['pipe', 'pipe', 'pipe']
             });
@@ -82,8 +84,8 @@ export default class javaExecutioner implements executioner {
             child.stderr.on('data', (data) => {
                 errorOutput += data.toString();
             });
-
-            child.stdin.write(input);
+            
+            child.stdin.write(fileContents);
             child.stdin.end();
 
             const timer = setTimeout(() => {
@@ -111,6 +113,7 @@ export default class javaExecutioner implements executioner {
 
     async execute(input: string): Promise<string> {
         await this.compile();
-        return this.run(input);
+        const output = await this.run(input);
+        return output;
     }
 }

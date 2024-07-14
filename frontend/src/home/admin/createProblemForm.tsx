@@ -265,16 +265,17 @@ export default function CreateProblemForm() {
             <FormItem>
               <FormLabel>Difficulty</FormLabel>
               <FormControl>
-              <Select>
-              <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Difficulty" />
-              </SelectTrigger>
-              <SelectContent>
-              <SelectItem value="Easy" className="text-green-500">Easy</SelectItem>
-              <SelectItem value="Medium"className="text-yellow-500">Medium</SelectItem>
-              <SelectItem value="Hard"className="text-red-500">Hard</SelectItem>
-              </SelectContent>
-              </Select>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Difficulty" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Easy" className="text-green-500">Easy</SelectItem>
+                    <SelectItem value="Medium" className="text-yellow-500">Medium</SelectItem>
+                    <SelectItem value="Hard" className="text-red-500">Hard</SelectItem>
+                  </SelectContent>
+                </Select>
+
               </FormControl>
               <FormMessage />
             </FormItem>

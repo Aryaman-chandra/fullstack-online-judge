@@ -2,7 +2,6 @@ import './globals.css'
 import { ThemeProvider } from './components/ui/theme-provider';
 import { RouterProvider } from 'react-router-dom';
 import {  QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import  router  from './root/routes.tsx'
 import { useQueryClient } from './config/queryClient.ts';
 
@@ -17,7 +16,6 @@ const App = () => {
               <RouterProvider router={router}/>
             </main>
     </ThemeProvider>
-    <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     )
 }

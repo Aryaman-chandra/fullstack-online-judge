@@ -5,15 +5,9 @@ import { navigate } from '@/lib/navigation';
 const Header = () => {
     const { user } = useAuth();
   return (
-<<<<<<< HEAD
       <div className=' sticky top-0 z-50 flex justify-between items-center mx-6  h-12 backdrop-blur-lg border-b border-neutral-700/80'>
       <div onClick={()=> navigate("/home")}>Home</div>
       <div className='justify-self-center'>
-=======
-      <div className='flex justify-around h-12'>
-      <div></div>
-      <div>
->>>>>>> main
         <NavigationMenu>
       <NavigationMenuList>
          <NavigationMenuItem >

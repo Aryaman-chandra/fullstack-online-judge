@@ -14,7 +14,7 @@ const ProblemCard = ( props:{_id: string , title: string , tags: string[] , diff
     }
   return (
         <>
-        <Card className='bg-card p-3 w-[60%] h-max-1  '>
+        <Card className='bg-card p-2 w-[40%] h-max-1  '>
             <CardHeader className="flex-row justify-between items-center rounded-lg ">
                 <CardTitle className="hover:text-primary" onClick={openProblem}>{props.title}</CardTitle>
                 <div className=' mr-4'>
@@ -22,7 +22,7 @@ const ProblemCard = ( props:{_id: string , title: string , tags: string[] , diff
                 </div>
             </CardHeader>
             <CardContent>
-                <div className='flex flex-row gap-2 '>
+                <div className='flex flex-row gap-1 '>
                     <ul className='flex  justify-start space-x-3 overflow-auto w-[80%] md:w-[100%]'  >{tagsList}</ul>
                     
                 </div>

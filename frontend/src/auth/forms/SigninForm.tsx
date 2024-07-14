@@ -80,7 +80,7 @@ const SigninForm = () => {
       <div className="w-full h-2 flex justify-end">
       <NavLink to={"/auth/sign-up"} className="text-primary text-xs" replace={true}>Don't have an Account?</NavLink>
       </div>
-      {isPending?  <Button disabled> <Loader2 className="mr-2 h-4 w-4 animate-spin" />Please wait</Button>:  <Button type="submit" >Sign Up</Button>}
+      {isPending?  <Button disabled> <Loader2 className="mr-2 h-4 w-4 animate-spin" />Please wait</Button>:  <Button type="submit" >Sign In</Button>}
     </form>
   </Form>
   )

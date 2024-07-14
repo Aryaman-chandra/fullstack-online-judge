@@ -27,3 +27,20 @@ export const problemSchema = z.object({
   time_limit: z.number().positive(),
   memory_limit: z.number().positive()
 })
+export const contestSchema = z.object({
+  title: z.string().min(4).max(50),
+  description: z.string().min(15).max(500),
+  start_time: z.string(),
+  end_time: z.string(),
+  problems: z.array(z.object({
+    title: z.string().min(4).max(25),
+    statement: z.string().min(15).max(300),
+    difficulty: z.enum(["Easy", "Medium", "Hard"]),
+    points: z.number().positive(),
+    time_limit: z.number().positive(),
+    testcases: z.array(z.object({
+      input: z.string(),
+      output: z.string()
+    })),
+  })),
+});

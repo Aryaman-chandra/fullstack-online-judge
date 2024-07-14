@@ -19,13 +19,13 @@ API.interceptors.response.use(
     async (error) => {
         const {config , response } = error; 
         const { status ,data } = response 
-        if(status===401 && data?.message==='Invalid token'){
+        if(status===401 && ( data?.message==='Invalid token' ||   data?.message==='Session Expired ! Please login instead')){
             try {
                await TokenRefreshClient.get("/auth/refresh");
                return TokenRefreshClient(config)
             } catch (error) {
                 queryClient.clear();
-                navigate("/auth/sign-in",{
+                navigate("/auth/sign-up",{
                     state:{
                         redirectUrl: window.location.pathname,
                     }

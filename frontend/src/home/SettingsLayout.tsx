@@ -16,13 +16,23 @@ const sidebarNavItems = [
   {
       title: "Create Contest",
       role : "admin",
-      href : "/home/settings/create/contest"
+      href : "/home/settings/admin/create/contest"
   },
   {
       title: "Add Problem",
       role : "admin",
-      href : "/home/settings/create/Problem"
-  } 
+      href : "/home/settings/admin/create/Problem"
+  },
+  {
+      title : "My problems",
+      role : "admin",
+      href : "/home/settings/admin/myproblems"
+  },
+  {
+      title : "My Contests",
+      role : "admin",
+      href : "/home/settings/admin/myContests"
+  }
 ]
 const SettingsLayout = () => {
     const {user} = useAuth();

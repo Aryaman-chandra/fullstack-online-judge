@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(41%) sepia(77%) saturate(2047%) hue-rotate(314deg) brightness(95%) contrast(100%);
+}
 /* Track */
 ::-webkit-scrollbar {
   width: 8px;

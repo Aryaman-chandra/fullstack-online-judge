@@ -1,6 +1,8 @@
+import CreateContestForm from "./ContestForm"
+
 const CreateContestPage = () => {
   return (
-    <div>CreateContestPage</div>
+      <CreateContestForm/>
   )
 }
 

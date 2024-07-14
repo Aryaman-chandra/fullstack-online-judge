@@ -2,6 +2,7 @@ import UserModel from "../models/user.model";
 import { AuthenticationError } from "../errors/AuthenticationError";
 import { createAccountParams, loginUserParams } from "../params/user.params";
 import jwt from 'jsonwebtoken';
+import { DataBaseError } from "../errors/DatabaseError";
 const secret = process.env.JWT_SECRET!;
 const refreshSecret = process.env.JWT_REFRESH_SECRET!;
 
@@ -9,7 +10,7 @@ const refreshSecret = process.env.JWT_REFRESH_SECRET!;
 export const createAccount = async(data : createAccountParams) => {
     const existingUser = await UserModel.exists({ email:data.email});
     
-    if(existingUser) throw new AuthenticationError('User Already Exists');
+    if(existingUser) throw new DataBaseError('User Already Exists');
 
     const user = await  UserModel.create({username: data.username , email : data.email , password : data.password});
     const tokenUser= user.omitPassword();

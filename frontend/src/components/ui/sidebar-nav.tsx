@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "./button"
 import { Link, NavLink } from "react-router-dom"
 import { useAuth } from "@/hooks/useAuth"
+import { useState } from "react"
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
@@ -12,7 +13,7 @@ interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
-  const pathname = window.location.pathname;
+  const [pathname,setPathname] = useState(window.location.pathname);
   const {user} = useAuth();
   return (
     <div
@@ -34,6 +35,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
               : "hover:bg-primary hover:underline",
             "justify-start"
           )}
+          onClick={()=>setPathname(item.href)}
         >
           {item.title}
         </NavLink>: <div key={item.href}></div>

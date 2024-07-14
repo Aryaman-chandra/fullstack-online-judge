@@ -1,13 +1,26 @@
 import React from 'react'
 import ForceGraph from './ForceGraph'
 import { navigate } from '@/lib/navigation'
+import { useQuery } from '@tanstack/react-query'
+import { Loader } from '@/lib/utils/loader'
+import { stats } from '@/lib/api'
 
 const HomePage = () => {
+    const myStats = async ()=>{
+        const data = await stats();
+        return data;
+    }
+    const {data , isFetching}  = useQuery({
+        queryKey: ["stats"],
+        queryFn: myStats
+    })
+
   return (
     <div className= 'grid grid-cols-4 grid-rows-4 h-full w-full gap-1 p-6'>
       <div className='col-span-2 row-span-4'><ForceGraph/></div>
-        <StatsCard title="Problems Solved" value="42" icon="🏆" />
-        <StatsCard title="Submissions" value="128" icon="📊" onClick={()=>navigate("home/submissions")}/>
+        { (isFetching)?
+        <Loader isLoading={isFetching}/>:(<><StatsCard title="Problems Solved" value={data.solved} icon="🏆" />
+        <StatsCard title="Submissions" value={data.totalSubmissions} icon="📊" onClick={()=>navigate("home/submissions")}/></>)}
     </div>
   )
 }

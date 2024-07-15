@@ -56,9 +56,10 @@ const SettingsLayout = () => {
             <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
               <aside className="-mx-4 lg:w-1/5">
                 <SidebarNav items={sidebarNavItems} />
-               <div  className={(user)? cn( buttonVariants({ variant: "ghost" }), "hover:bg-primary hover:underline", "justify-start"):''} onClick={()=> onLogout()}>
-                Logout
-                </div>
+               <div  className={(user)? cn( buttonVariants({ variant: "ghost" }), "hover:bg-primary hover:underline", "justify-start"):''} onClick={()=> onLogout()}> Logout </div>
+               <br/>
+                <div className={(user)? cn( buttonVariants({ variant: "ghost" }), "hover:bg-primary hover:underline", "justify-start"):''} onClick={()=> { window.location.href = `mailto:aryamanch14@gmail.com?subject=${encodeURIComponent("Request for Admin Acess")}`;} }>request for admin acess</div>
+
               </aside>
               <div className="flex-1 lg:max-w-2xl"><Outlet/></div>
             </div>

@@ -15,7 +15,7 @@ const ProblemCard = ( props:{_id: string , title: string , tags: string[] , diff
   return (
         <>
         <Card className='bg-card p-2 w-[40%] h-max-1  '>
-            <CardHeader className="flex-row justify-between items-center rounded-lg ">
+            <CardHeader className="flex flex-row justify-between items-center rounded-lg ">
                 <CardTitle className="hover:text-primary" onClick={openProblem}>{props.title}</CardTitle>
                 <div className=' mr-4'>
                     <div className={(props.difficulty==='Easy')? 'text-green-500':(props.difficulty==='Medium')?'text-yellow-500':'text-red-500'}>{props.difficulty}</div>

@@ -16,7 +16,7 @@ const HomePage = () => {
     })
 
   return (
-    <div className= 'grid grid-cols-4 grid-rows-4 h-full w-full gap-1 p-6'>
+    <div className= 'grid grid-cols-4 grid-rows-4 h-full w-full gap-3 p-6'>
       <div className='col-span-2 row-span-4'><ForceGraph/></div>
         { (isFetching)?
         <Loader isLoading={isFetching}/>:(<><StatsCard title="Problems Solved" value={data.solved} icon="🏆" />

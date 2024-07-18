@@ -24,7 +24,7 @@ const ContestList = () => {
       {data.ongoing.map((contest) => (
         <div key={contest._id} className="bg-rose-600 text-white rounded-lg shadow-md p-6 transition-transform duration-200 hover:-translate-y-1 border-2 border-rose-400">
           <h3 className="text-xl font-semibold mb-2" onClick={()=>navigate(`contests/${contest._id}`)}>{contest.title}</h3>
-          <p className="text-rose-200">Ends: {new Date(contest.end_time).toLocaleString()}</p>
+          <p className="text-rose-200">Ends: {new Date(contest.end_time).toLocaleTimeString()}</p>
         </div>
       ))}
     </div>
@@ -36,7 +36,7 @@ const ContestList = () => {
       {data.upcoming.map((contest) => (
         <div key={contest._id} className="bg-gray-800 rounded-lg shadow-md p-6 transition-transform duration-200 hover:-translate-y-1 border border-rose-300">
           <h3 className="text-xl font-semibold text-rose-300 mb-2" onClick={()=>navigate(`contests/${contest._id}`)}>{contest.title}</h3>
-          <p className="text-gray-300">Starts: {new Date(contest.start_time).toLocaleString()}</p>
+          <p className="text-gray-300">Starts: {new Date(contest.start_time).toDateString()}</p>
         </div>
       ))}
     </div>
@@ -48,7 +48,7 @@ const ContestList = () => {
       {data.past.map((contest) => (
         <div key={contest._id} className="bg-gray-900 rounded-lg shadow-md p-6 transition-transform duration-200 hover:-translate-y-1 border border-gray-700">
           <h3 className="text-xl font-semibold mb-2 text-gray-300" onClick={()=>navigate(`contests/${contest._id}`)}>{contest.title}</h3>
-          <p className="text-gray-400">Ended: {new Date(contest.end_time).toLocaleDateString()}</p>
+          <p className="text-gray-400">Ended: {new Date(contest.end_time).toDateString()}</p>
         </div>
       ))}
     </div>

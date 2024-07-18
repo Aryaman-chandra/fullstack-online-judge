@@ -35,7 +35,8 @@ const ForceGraph = () => {
     const simulation = d3.forceSimulation(data.nodes)
       .force("link", d3.forceLink(data.links).id(d => d.id))
       .force("charge", d3.forceManyBody().strength(-100))
-      .force("center", d3.forceCenter(width / 2, height / 2));
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("radial",d3.forceRadial(50, width / 2, height / 2));
 
     simulationRef.current = simulation;
 
@@ -145,7 +146,7 @@ const ForceGraph = () => {
   if (isPending) return <Loader isLoading={isPending} />;
 
   return (
-    <div className="w-full h-screen bg-background relative">
+    <div className="w-full h-screen bg-background relative  rounded-md border hover:ring  transition ease-out duration-300 hover:ring-primary">
       <svg ref={svgRef} className="w-full h-full"></svg>
     </div>
   );

@@ -14,6 +14,7 @@ const CodeOutputTab = (payload:{
 }) => {
     const [value,setValue] = useState('');
     const [output,setOutput] =useState('');
+    const [tabsValue , setTabsValue] = useState('Input');
 
     const onSubmit = async(data:any)=>{
       let result:any;
@@ -61,7 +62,7 @@ const getVerdictColor = (verdict) => {
   });
   return (
     <div className="w-full h-full flex flex-col">
-      <Tabs defaultValue="Input" className="w-full md:h-60">
+      <Tabs defaultValue="Input" className="w-full md:h-60" value={tabsValue} onValueChange={setTabsValue}>
         <TabsList>
           <TabsTrigger value="Input">Input</TabsTrigger>
           <TabsTrigger value="Output">Output</TabsTrigger>
@@ -112,9 +113,9 @@ const getVerdictColor = (verdict) => {
         </div>          )}
         </TabsContent>
           </Tabs>
-      <div className="mt-3 space-x-6">
-        <Button onClick={()=>{runMutation.mutate({payload:{code : payload.payload.code , language: payload.payload.language , testcases:value} , key: 2})}}>Run</Button>
-        <Button onClick={()=>submitMutation.mutate( { payload:payload.payload })}>Submit</Button>
+      <div className="mt-2 space-x-6">
+        <Button onClick={()=> { setTabsValue("Output"); runMutation.mutate({payload:{code : payload.payload.code , language: payload.payload.language , testcases:value} , key: 2})}}>Run</Button>
+        <Button onClick={()=> { setTabsValue("Verdict"); submitMutation.mutate( { payload:payload.payload })}}>Submit</Button>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
-       <main className=' flex-col h-screen '>
+       <main className=' flex-col'>
               <RouterProvider router={router}/>
             </main>
     </ThemeProvider>

@@ -5,7 +5,7 @@ import { BadRequestError } from "../errors/BadRequestError";
 // validation schemas 
 export const problemSchema = z.object({
     title : z.string().min(4).max(25),
-    statement : z.string().min(15).max(300),
+    statement : z.string().min(15),
     tags : z.array(z.string().min(2)).optional(),
     difficulty: z.enum(["Easy","Medium" ,"Hard"]),
     testcases : z.array(z.object({

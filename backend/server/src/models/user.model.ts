@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose  from "mongoose";
 import { compareValue, hashValue } from "../utils/bcrypt";
 import { defaults } from "../constants/defaults"
 
@@ -22,7 +22,7 @@ export interface UserDocument extends mongoose.Document{
     links: { source : mongoose.Types.ObjectId , target : mongoose.Types.ObjectId }[];
     nodes: { title :string , id  : string, group : string }[];
     comparePassword(val : string ): Promise<boolean>;
-    omitPassword() : Omit<UserDocument,"password">
+    omitPassword() : Pick<UserDocument,"username" | "email" | "role">
     generateUsername(): void
 }
 
@@ -92,8 +92,12 @@ UserSchema.methods.comparePassword = async function (val :string ):Promise<boole
 
 UserSchema.methods.omitPassword = function (){
     const user = this.toObject();
-    delete user.password;
-    return user;
+    const tokenUser:Pick<UserDocument,"username" | "email" | "role"> = {
+                username :user.username,
+                email : user.email,
+                role: user.role,
+    }
+    return tokenUser;
 }
 
 UserSchema.methods.generateUsername = function(){

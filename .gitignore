@@ -1,3 +1,4 @@
 /backend/*
 docs/.obsidian/
 !backend/src/
+keys/*

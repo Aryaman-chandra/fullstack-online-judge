@@ -11,7 +11,7 @@ Code Nexus provides a powerful linking feature that allows users to establish co
 - **Search Problems**: Users can search from problems by typing the name of the problem they want to link.
   
 - **Graph Visualization**: The linked problems are visualized in an interactive graph format, which provides a clear and intuitive way to explore how different problems are connected.
-![Graph ](Drawing 2024-07-21 12.57.36.svg)
+![Graph ](../Attachments/Drawing 2024-07-21 12.57.36.svg)
 ### 2. Interactive Graph View
 
 - **Visual Representation**: The graph view dynamically illustrates the linked problems and their connections.

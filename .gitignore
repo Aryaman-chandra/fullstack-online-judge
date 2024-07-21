@@ -1,3 +1,13 @@
-/backend/*
+/backend/server/*
+/backend/compiler/*
+/backend/.env
+/backend/aws/*
+/backend/awscliv2.zip
 docs/.obsidian/
-!backend/src/
+!backend/server/src/
+!backend/compiler/src/
+!backend/compiler/Dockerfile
+!backend/server/Dockerfile
+!backend/docker-compose.yml
+/frontend/node_modules/
+keys/

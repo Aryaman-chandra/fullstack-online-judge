@@ -1,7 +1,7 @@
 # Code Nexus
 
 Welcome to **Code Nexus**! This project aims to provide a platform where you can solve practice problems, participate in contests, and gain insights through linked problems. Whether you're a beginner or an experienced coder, Code Nexus is designed to help you improve your skills and knowledge in programming.
-![Landing Page](Attachments/code-nexus-landing-page.png)
+![Landing Page](docs/Attachments/code-nexus-landing-page.png)
 
 ## Features
 

@@ -11,7 +11,7 @@ const App = () => {
   const queryClient = useQueryClient();                        
   return (
     <QueryClientProvider client={queryClient}>
-    <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
+    <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
        <main className=' flex-col'>
               <RouterProvider router={router}/>
             </main>
